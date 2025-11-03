@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { AuthContext } from '../../App'
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/utils/cn"
@@ -112,9 +113,9 @@ const Header = ({ cartItemCount = 0, onCartOpen, className, ...props }) => {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => {
-                const { AuthContext } = window.React?.useContext ? window.React.useContext(require('../../App').AuthContext) : null;
-                if (AuthContext?.logout) AuthContext.logout();
+onClick={() => {
+                const authContext = useContext(AuthContext);
+                if (authContext?.logout) authContext.logout();
               }}
               className="flex items-center space-x-2"
             >
