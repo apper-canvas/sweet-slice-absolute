@@ -139,9 +139,14 @@ const Checkout = () => {
 
     setIsSubmitting(true)
     try {
-      const orderData = {
-        ...customerInfo,
-        ...deliveryInfo,
+const orderData = {
+        customerName: customerInfo.customerName,
+        email: customerInfo.email,
+        phone: customerInfo.phone,
+        deliveryMethod: deliveryInfo.deliveryMethod,
+        deliveryDate: deliveryInfo.deliveryDate,
+        deliveryTime: deliveryInfo.deliveryTime,
+        specialInstructions: deliveryInfo.specialInstructions,
         items: cartItems,
         totalAmount: getTotalAmount()
       }
@@ -153,7 +158,7 @@ const Checkout = () => {
       window.dispatchEvent(new Event("cartUpdated"))
 
       toast.success("Order placed successfully!")
-      navigate(`/order-confirmation/${newOrder.orderId}`)
+navigate(`/order-confirmation/${newOrder.orderId_c || newOrder.orderId}`)
     } catch (error) {
       console.error("Error placing order:", error)
       toast.error("Failed to place order. Please try again.")

@@ -85,7 +85,7 @@ const Header = ({ cartItemCount = 0, onCartOpen, className, ...props }) => {
           </nav>
 
           {/* Cart and Mobile Menu */}
-          <div className="flex items-center space-x-3">
+<div className="flex items-center space-x-3">
             {/* Cart Button */}
             <button
               onClick={onCartOpen}
@@ -107,6 +107,20 @@ const Header = ({ cartItemCount = 0, onCartOpen, className, ...props }) => {
                 </motion.div>
               )}
             </button>
+
+            {/* Logout Button */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                const { AuthContext } = window.React?.useContext ? window.React.useContext(require('../../App').AuthContext) : null;
+                if (AuthContext?.logout) AuthContext.logout();
+              }}
+              className="flex items-center space-x-2"
+            >
+              <ApperIcon name="LogOut" size={16} />
+              <span className="hidden sm:inline">Logout</span>
+            </Button>
 
             {/* Mobile Menu Button */}
             <Button

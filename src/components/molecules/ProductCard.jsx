@@ -14,14 +14,14 @@ const ProductCard = ({ product, onAddToCart, className, ...props }) => {
     e.stopPropagation()
     setIsLoading(true)
     try {
-      await onAddToCart({
+await onAddToCart({
         productId: product.Id.toString(),
-        productName: product.name,
+        productName: product.name || product.name_c,
         quantity: 1,
-        size: product.availableSizes[0],
-        flavor: product.availableFlavors[0],
+        size: product.availableSizes ? product.availableSizes[0] : "Medium",
+        flavor: product.availableFlavors ? product.availableFlavors[0] : "Vanilla",
         customMessage: "",
-        price: product.basePrice
+        price: product.basePrice || product.basePrice_c
       })
     } catch (error) {
       console.error("Error adding to cart:", error)

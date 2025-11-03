@@ -1,77 +1,284 @@
-import productsData from "@/services/mockData/products.json";
-
-// Simulate network delay
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+import { toast } from "react-toastify";
 
 class ProductService {
   constructor() {
-    this.products = [...productsData];
+    const { ApperClient } = window.ApperSDK;
+    this.apperClient = new ApperClient({
+      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+    });
+    this.tableName = 'product_c';
   }
 
   async getAll() {
-    await delay(300);
-    return [...this.products];
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "Tags"}},
+          {"field": {"Name": "basePrice_c"}},
+          {"field": {"Name": "category_c"}},
+          {"field": {"Name": "customizable_c"}},
+          {"field": {"Name": "description_c"}},
+          {"field": {"Name": "name_c"}}
+        ]
+      };
+      
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return [];
+      }
+      
+      return response.data || [];
+    } catch (error) {
+      console.error("Error fetching products:", error?.response?.data?.message || error);
+      toast.error("Failed to load products");
+      return [];
+    }
   }
 
   async getById(id) {
-    await delay(200);
-    const product = this.products.find(p => p.Id === parseInt(id));
-    if (!product) {
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "Tags"}},
+          {"field": {"Name": "basePrice_c"}},
+          {"field": {"Name": "category_c"}},
+          {"field": {"Name": "customizable_c"}},
+          {"field": {"Name": "description_c"}},
+          {"field": {"Name": "name_c"}}
+        ]
+      };
+      
+      const response = await this.apperClient.getRecordById(this.tableName, parseInt(id), params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message || "Product not found");
+      }
+      
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching product ${id}:`, error?.response?.data?.message || error);
       throw new Error("Product not found");
     }
-    return { ...product };
   }
 
   async getByCategory(category) {
-    await delay(250);
-    return this.products.filter(p => p.category === category).map(p => ({ ...p }));
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "Tags"}},
+          {"field": {"Name": "basePrice_c"}},
+          {"field": {"Name": "category_c"}},
+          {"field": {"Name": "customizable_c"}},
+          {"field": {"Name": "description_c"}},
+          {"field": {"Name": "name_c"}}
+        ],
+        where: [{"FieldName": "category_c", "Operator": "EqualTo", "Values": [category]}]
+      };
+      
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        return [];
+      }
+      
+      return response.data || [];
+    } catch (error) {
+      console.error("Error fetching products by category:", error?.response?.data?.message || error);
+      return [];
+    }
   }
 
   async getFeatured(limit = 6) {
-    await delay(200);
-    return this.products.slice(0, limit).map(p => ({ ...p }));
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "Tags"}},
+          {"field": {"Name": "basePrice_c"}},
+          {"field": {"Name": "category_c"}},
+          {"field": {"Name": "customizable_c"}},
+          {"field": {"Name": "description_c"}},
+          {"field": {"Name": "name_c"}}
+        ],
+        pagingInfo: {"limit": limit, "offset": 0}
+      };
+      
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        return [];
+      }
+      
+      return response.data || [];
+    } catch (error) {
+      console.error("Error fetching featured products:", error?.response?.data?.message || error);
+      return [];
+    }
   }
 
   async search(query) {
-    await delay(300);
-    const searchTerm = query.toLowerCase();
-    return this.products.filter(p => 
-      p.name.toLowerCase().includes(searchTerm) ||
-      p.description.toLowerCase().includes(searchTerm) ||
-      p.category.toLowerCase().includes(searchTerm)
-    ).map(p => ({ ...p }));
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "Tags"}},
+          {"field": {"Name": "basePrice_c"}},
+          {"field": {"Name": "category_c"}},
+          {"field": {"Name": "customizable_c"}},
+          {"field": {"Name": "description_c"}},
+          {"field": {"Name": "name_c"}}
+        ],
+        whereGroups: [{
+          "operator": "OR",
+          "subGroups": [
+            {"conditions": [{"fieldName": "name_c", "operator": "Contains", "values": [query]}], "operator": ""},
+            {"conditions": [{"fieldName": "description_c", "operator": "Contains", "values": [query]}], "operator": ""},
+            {"conditions": [{"fieldName": "category_c", "operator": "Contains", "values": [query]}], "operator": ""}
+          ]
+        }]
+      };
+      
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        return [];
+      }
+      
+      return response.data || [];
+    } catch (error) {
+      console.error("Error searching products:", error?.response?.data?.message || error);
+      return [];
+    }
   }
 
   async create(product) {
-    await delay(400);
-    const newId = Math.max(...this.products.map(p => p.Id)) + 1;
-    const newProduct = {
-      ...product,
-      Id: newId
-    };
-    this.products.push(newProduct);
-    return { ...newProduct };
+    try {
+      const params = {
+        records: [{
+          Tags: product.Tags || "",
+          Name: product.Name,
+          basePrice_c: product.basePrice_c,
+          category_c: product.category_c,
+          customizable_c: product.customizable_c || false,
+          description_c: product.description_c,
+          name_c: product.name_c
+        }]
+      };
+      
+      const response = await this.apperClient.createRecord(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        throw new Error(response.message);
+      }
+      
+      if (response.results) {
+        const successful = response.results.filter(r => r.success);
+        const failed = response.results.filter(r => !r.success);
+        
+        if (failed.length > 0) {
+          console.error(`Failed to create ${failed.length} products:`, failed);
+          failed.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+        }
+        return successful.length > 0 ? successful[0].data : null;
+      }
+    } catch (error) {
+      console.error("Error creating product:", error?.response?.data?.message || error);
+      throw error;
+    }
   }
 
   async update(id, productData) {
-    await delay(350);
-    const index = this.products.findIndex(p => p.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Product not found");
+    try {
+      const updateFields = {};
+      if (productData.Tags !== undefined) updateFields.Tags = productData.Tags;
+      if (productData.Name !== undefined) updateFields.Name = productData.Name;
+      if (productData.basePrice_c !== undefined) updateFields.basePrice_c = productData.basePrice_c;
+      if (productData.category_c !== undefined) updateFields.category_c = productData.category_c;
+      if (productData.customizable_c !== undefined) updateFields.customizable_c = productData.customizable_c;
+      if (productData.description_c !== undefined) updateFields.description_c = productData.description_c;
+      if (productData.name_c !== undefined) updateFields.name_c = productData.name_c;
+      
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          ...updateFields
+        }]
+      };
+      
+      const response = await this.apperClient.updateRecord(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        throw new Error(response.message);
+      }
+      
+      if (response.results) {
+        const successful = response.results.filter(r => r.success);
+        const failed = response.results.filter(r => !r.success);
+        
+        if (failed.length > 0) {
+          console.error(`Failed to update ${failed.length} products:`, failed);
+          failed.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+        }
+        return successful.length > 0 ? successful[0].data : null;
+      }
+    } catch (error) {
+      console.error("Error updating product:", error?.response?.data?.message || error);
+      throw error;
     }
-    this.products[index] = { ...this.products[index], ...productData };
-    return { ...this.products[index] };
   }
 
   async delete(id) {
-    await delay(300);
-    const index = this.products.findIndex(p => p.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Product not found");
+    try {
+      const params = { 
+        RecordIds: [parseInt(id)]
+      };
+      
+      const response = await this.apperClient.deleteRecord(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        throw new Error(response.message);
+      }
+      
+      if (response.results) {
+        const successful = response.results.filter(r => r.success);
+        const failed = response.results.filter(r => !r.success);
+        
+        if (failed.length > 0) {
+          console.error(`Failed to delete ${failed.length} products:`, failed);
+          failed.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+        }
+        return successful.length > 0;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error deleting product:", error?.response?.data?.message || error);
+      throw error;
     }
-    const deleted = this.products.splice(index, 1)[0];
-    return { ...deleted };
   }
 }
 
+export default new ProductService();
 export default new ProductService();

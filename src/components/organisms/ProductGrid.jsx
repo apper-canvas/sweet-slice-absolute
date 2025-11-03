@@ -37,11 +37,27 @@ const ProductGrid = ({ category, onAddToCart, className, ...props }) => {
     setLoading(true)
     setError("")
     try {
-      const data = selectedCategory === "all" 
+const data = selectedCategory === "all" 
         ? await productService.getAll()
         : await productService.getByCategory(selectedCategory)
-      setProducts(data)
-      setFilteredProducts(data)
+      
+      // Map database field names to component expected format
+      const mappedProducts = data.map(product => ({
+        ...product,
+        name: product.name_c || product.Name,
+        basePrice: product.basePrice_c,
+        category: product.category_c,
+        customizable: product.customizable_c,
+        description: product.description_c,
+        // Add mock data for fields not in database
+        images: ["/api/placeholder/300/300"],
+        availableSizes: ["Small", "Medium", "Large"],
+        availableFlavors: ["Vanilla", "Chocolate", "Strawberry"],
+        dietaryTags: product.Tags ? product.Tags.split(',') : []
+      }))
+      
+      setProducts(mappedProducts)
+      setFilteredProducts(mappedProducts)
     } catch (err) {
       setError(err.message || "Failed to load products")
     } finally {

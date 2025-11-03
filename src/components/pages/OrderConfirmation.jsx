@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react"
-import { useParams, Link } from "react-router-dom"
-import { motion } from "framer-motion"
-import orderService from "@/services/api/orderService"
-import Loading from "@/components/ui/Loading"
-import Error from "@/components/ui/Error"
-import ApperIcon from "@/components/ApperIcon"
-import Button from "@/components/atoms/Button"
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import orderService from "@/services/api/orderService";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import Contact from "@/components/pages/Contact";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
 
 const OrderConfirmation = () => {
   const { orderId } = useParams()
@@ -13,14 +14,29 @@ const OrderConfirmation = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
 
-  const loadOrder = async () => {
+const loadOrder = async () => {
     setLoading(true)
     setError("")
     try {
       const data = await orderService.getByOrderId(orderId)
-      setOrder(data)
-    } catch (err) {
-      setError(err.message || "Failed to load order details")
+      // Map database field names to component expected format
+      const mappedOrder = {
+        ...data,
+        orderId: data.orderId_c,
+        customerName: data.customerName_c,
+        email: data.email_c,
+        phone: data.phone_c,
+        status: data.status_c || "processing",
+        deliveryMethod: data.deliveryMethod_c,
+        deliveryDate: data.deliveryDate_c,
+        deliveryTime: data.deliveryTime_c,
+        specialInstructions: data.specialInstructions_c,
+        totalAmount: data.totalAmount_c,
+        items: data.items_c ? JSON.parse(data.items_c) : []
+      }
+      setOrder(mappedOrder)
+    } catch (error) {
+      setError(error.message || "Failed to load order details")
     } finally {
       setLoading(false)
     }

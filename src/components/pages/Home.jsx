@@ -19,8 +19,17 @@ const Home = () => {
     setLoading(true)
     setError("")
     try {
-      const products = await productService.getFeatured(6)
-      setFeaturedProducts(products)
+const products = await productService.getFeatured(6)
+      // Map database field names to component expected format
+      const mappedProducts = products.map(product => ({
+        ...product,
+        name: product.name_c || product.Name,
+        basePrice: product.basePrice_c,
+        category: product.category_c,
+        customizable: product.customizable_c,
+        description: product.description_c
+      }))
+      setFeaturedProducts(mappedProducts)
     } catch (err) {
       setError(err.message || "Failed to load featured products")
     } finally {

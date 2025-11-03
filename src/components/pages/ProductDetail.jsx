@@ -29,10 +29,24 @@ const ProductDetail = () => {
     setLoading(true)
     setError("")
     try {
-      const data = await productService.getById(id)
-      setProduct(data)
-      setSelectedSize(data.availableSizes[0])
-      setSelectedFlavor(data.availableFlavors[0])
+const data = await productService.getById(id)
+      // Map database field names to component expected format
+      const mappedProduct = {
+        ...data,
+        name: data.name_c || data.Name,
+        basePrice: data.basePrice_c,
+        category: data.category_c,
+        customizable: data.customizable_c,
+        description: data.description_c,
+        // Add mock data for fields not in database
+        images: ["/api/placeholder/400/400"],
+        availableSizes: ["Small", "Medium", "Large"],
+        availableFlavors: ["Vanilla", "Chocolate", "Strawberry"],
+        dietaryTags: data.Tags ? data.Tags.split(',') : []
+      }
+      setProduct(mappedProduct)
+      setSelectedSize(mappedProduct.availableSizes[0])
+      setSelectedFlavor(mappedProduct.availableFlavors[0])
     } catch (err) {
       setError(err.message || "Failed to load product")
     } finally {
