@@ -1,0 +1,182 @@
+[
+  {
+    "Id": 1,
+    "name": "Classic Chocolate Celebration Cake",
+    "category": "cakes",
+    "basePrice": 45.99,
+    "description": "Rich, moist chocolate cake layered with velvety chocolate buttercream. Perfect for birthdays and special celebrations. Made with premium Belgian cocoa and topped with elegant chocolate shavings.",
+    "images": [
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80",
+      "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 inch", "8 inch", "10 inch", "12 inch"],
+    "availableFlavors": ["Dark Chocolate", "Milk Chocolate", "White Chocolate"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 2,
+    "name": "Vanilla Dream Wedding Cake",
+    "category": "cakes",
+    "basePrice": 89.99,
+    "description": "Elegant three-tier vanilla sponge cake with fresh vanilla bean buttercream. Decorated with delicate sugar flowers and perfect for weddings or anniversaries.",
+    "images": [
+      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=500&q=80",
+      "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["8 inch", "10 inch", "12 inch", "Multi-tier"],
+    "availableFlavors": ["Vanilla Bean", "French Vanilla", "Madagascar Vanilla"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 3,
+    "name": "Red Velvet Romance",
+    "category": "cakes",
+    "basePrice": 52.99,
+    "description": "Luxurious red velvet cake with classic cream cheese frosting. The perfect balance of cocoa and tang, finished with a velvety smooth texture that melts in your mouth.",
+    "images": [
+      "https://images.unsplash.com/photo-1586985564150-0cac34f27e27?w=500&q=80",
+      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 inch", "8 inch", "10 inch"],
+    "availableFlavors": ["Classic Red Velvet", "Pink Velvet", "Blue Velvet"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 4,
+    "name": "Lemon Sunshine Cake",
+    "category": "cakes",
+    "basePrice": 48.99,
+    "description": "Bright and zesty lemon cake with fresh lemon curd filling and lemon buttercream. Garnished with candied lemon wheels and fresh berries for a burst of sunshine.",
+    "images": [
+      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500&q=80",
+      "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 inch", "8 inch", "10 inch"],
+    "availableFlavors": ["Lemon", "Lime", "Orange"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 5,
+    "name": "Strawberry Shortcake Supreme",
+    "category": "cakes",
+    "basePrice": 55.99,
+    "description": "Fresh strawberry cake layered with whipped cream and fresh strawberries. Light, airy sponge cake that celebrates the sweetness of summer berries.",
+    "images": [
+      "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=500&q=80",
+      "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 inch", "8 inch", "10 inch"],
+    "availableFlavors": ["Strawberry", "Mixed Berry", "Raspberry"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 6,
+    "name": "Birthday Celebration Cupcakes",
+    "category": "cupcakes",
+    "basePrice": 24.99,
+    "description": "Dozen of colorful birthday cupcakes with vanilla cake base and rainbow buttercream swirls. Perfect for parties and celebrations. Each cupcake is individually decorated.",
+    "images": [
+      "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=500&q=80",
+      "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 pack", "12 pack", "24 pack"],
+    "availableFlavors": ["Vanilla", "Chocolate", "Funfetti", "Strawberry"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 7,
+    "name": "Chocolate Fudge Cupcakes",
+    "category": "cupcakes",
+    "basePrice": 27.99,
+    "description": "Rich chocolate cupcakes topped with decadent chocolate fudge frosting and a cherry on top. Made with premium cocoa for an intense chocolate experience.",
+    "images": [
+      "https://images.unsplash.com/photo-1587668178277-295251f900ce?w=500&q=80",
+      "https://images.unsplash.com/photo-1614707585284-9cb9fc018b82?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 pack", "12 pack", "24 pack"],
+    "availableFlavors": ["Dark Chocolate", "Milk Chocolate", "Double Fudge"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 8,
+    "name": "Lemon Lavender Cupcakes",
+    "category": "cupcakes",
+    "basePrice": 29.99,
+    "description": "Delicate lemon cupcakes infused with culinary lavender and topped with honey lavender buttercream. An elegant and sophisticated flavor combination.",
+    "images": [
+      "https://images.unsplash.com/photo-1550617931-e17a7b70deba?w=500&q=80",
+      "https://images.unsplash.com/photo-1603532648955-039310d9ed75?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 pack", "12 pack"],
+    "availableFlavors": ["Lemon Lavender", "Vanilla Lavender", "Honey Lemon"],
+    "dietaryTags": ["Vegetarian", "Natural"]
+  },
+  {
+    "Id": 9,
+    "name": "French Macarons Assortment",
+    "category": "pastries",
+    "basePrice": 18.99,
+    "description": "Elegant French macarons in assorted flavors including raspberry, chocolate, vanilla, and pistachio. Delicate almond shells with smooth ganache filling.",
+    "images": [
+      "https://images.unsplash.com/photo-1571506165871-ee72a35bfc8a?w=500&q=80",
+      "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["6 pack", "12 pack", "24 pack"],
+    "availableFlavors": ["Raspberry", "Chocolate", "Vanilla", "Pistachio", "Rose", "Salted Caramel"],
+    "dietaryTags": ["Vegetarian", "Gluten-Free"]
+  },
+  {
+    "Id": 10,
+    "name": "Classic Croissants",
+    "category": "pastries",
+    "basePrice": 15.99,
+    "description": "Buttery, flaky French croissants baked fresh daily. Perfect for breakfast or afternoon tea. Made with European-style butter for authentic flavor.",
+    "images": [
+      "https://images.unsplash.com/photo-1555507036-ab794f1ec35b?w=500&q=80",
+      "https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=500&q=80"
+    ],
+    "customizable": false,
+    "availableSizes": ["4 pack", "8 pack"],
+    "availableFlavors": ["Plain", "Almond", "Chocolate"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 11,
+    "name": "Fruit Danish Selection",
+    "category": "pastries",
+    "basePrice": 21.99,
+    "description": "Assorted fruit Danish pastries with flaky pastry base, cream cheese filling, and fresh fruit toppings. Available in cherry, blueberry, and apricot.",
+    "images": [
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80",
+      "https://images.unsplash.com/photo-1550617931-e17a7b70deba?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["4 pack", "8 pack", "12 pack"],
+    "availableFlavors": ["Cherry", "Blueberry", "Apricot", "Apple", "Strawberry"],
+    "dietaryTags": ["Vegetarian"]
+  },
+  {
+    "Id": 12,
+    "name": "Chocolate Eclairs",
+    "category": "pastries",
+    "basePrice": 19.99,
+    "description": "Classic French eclairs filled with vanilla pastry cream and topped with rich chocolate glaze. Light choux pastry with a perfect cream-to-pastry ratio.",
+    "images": [
+      "https://images.unsplash.com/photo-1587668178277-295251f900ce?w=500&q=80",
+      "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=500&q=80"
+    ],
+    "customizable": true,
+    "availableSizes": ["4 pack", "8 pack"],
+    "availableFlavors": ["Vanilla Cream", "Chocolate Cream", "Coffee Cream"],
+    "dietaryTags": ["Vegetarian"]
+  }
+]

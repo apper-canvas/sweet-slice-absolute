@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "orderId": "ORD-2024-001",
+    "customerName": "Sarah Johnson",
+    "email": "sarah.johnson@email.com",
+    "phone": "+1-555-123-4567",
+    "items": [
+      {
+        "productId": "1",
+        "productName": "Classic Chocolate Celebration Cake",
+        "quantity": 1,
+        "size": "8 inch",
+        "flavor": "Dark Chocolate",
+        "customMessage": "Happy Birthday Emma!",
+        "price": 45.99
+      }
+    ],
+    "deliveryMethod": "pickup",
+    "deliveryDate": "2024-01-15",
+    "deliveryTime": "14:00",
+    "specialInstructions": "Please have ready by 2 PM for pickup",
+    "totalAmount": 45.99,
+    "status": "completed"
+  },
+  {
+    "Id": 2,
+    "orderId": "ORD-2024-002",
+    "customerName": "Michael Chen",
+    "email": "m.chen@email.com",
+    "phone": "+1-555-987-6543",
+    "items": [
+      {
+        "productId": "6",
+        "productName": "Birthday Celebration Cupcakes",
+        "quantity": 2,
+        "size": "12 pack",
+        "flavor": "Vanilla",
+        "customMessage": "",
+        "price": 24.99
+      }
+    ],
+    "deliveryMethod": "delivery",
+    "deliveryDate": "2024-01-16",
+    "deliveryTime": "16:30",
+    "specialInstructions": "Leave at front door if no answer",
+    "totalAmount": 49.98,
+    "status": "pending"
+  }
+]
