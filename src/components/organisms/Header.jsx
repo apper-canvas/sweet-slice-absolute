@@ -8,6 +8,7 @@ import Button from "@/components/atoms/Button"
 import Badge from "@/components/atoms/Badge"
 
 const Header = ({ cartItemCount = 0, onCartOpen, className, ...props }) => {
+  const authContext = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
@@ -114,7 +115,6 @@ const Header = ({ cartItemCount = 0, onCartOpen, className, ...props }) => {
               variant="outline"
               size="sm"
 onClick={() => {
-                const authContext = useContext(AuthContext);
                 if (authContext?.logout) authContext.logout();
               }}
               className="flex items-center space-x-2"
